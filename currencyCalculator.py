@@ -126,7 +126,7 @@ def get_from_currency(currencies, from_currency=None):
         sys.exit()
     except:
         tOut.error_try_again()
-        return get_from_currency(from_currency)
+        return get_from_currency(currencies, from_currency)
     
     return from_currency
 
@@ -145,7 +145,7 @@ def get_to_currency(currencies, to_currency=None):
         sys.exit()
     except:
         tOut.error_try_again()
-        return get_to_currency(to_currency)
+        return get_to_currency(currencies, to_currency)
     
     return to_currency
 
@@ -158,7 +158,7 @@ def get_amount(currencies, from_currency, amount=None):
         sys.exit()
     except:
         tOut.error_try_again()
-        return get_amount(amount)
+        return get_amount(currencies, from_currency, amount)
     
     return amount
 
@@ -179,6 +179,7 @@ def rerun_app(rerun=None):
     while True:
         rerun = input('\nStart another calculation? ( y | n ): ')
         if rerun == 'y':
+            rerun = None
             main()
         elif rerun == 'n':
             break
