@@ -8,11 +8,14 @@ import requests
 
 
 def main():
+    FILE = os.path.abspath(__file__)
+    PATH = os.path.dirname(FILE)
+    
     # Set available currencies
     currencies = set_currencies()
     
     # Fetch data from api
-    fetch_data(currencies=currencies)
+    fetch_data(currencies=currencies, path=PATH)
     
     # Show available currencies
     print_currencies()
@@ -60,7 +63,7 @@ def set_currencies():
     return allowed_currency
 
 
-def fetch_data(currencies):
+def fetch_data(currencies, path):
     try:
         for i in currencies:
             file = currencies[i]
@@ -68,15 +71,15 @@ def fetch_data(currencies):
             response = requests.get(f'https://api.exchangerate.host/latest?base={file}')
             data = response.json()
             
-            file_name = f'currency/currency_{file}.json'
+            file_name = f'{path}/currency/currency_{file}.json'
             os.makedirs(os.path.dirname(file_name), exist_ok=True)
             
             with open(file_name, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
     except:
         print('''**********************************************************************
-    * No connection to the API-server. The data might not be the latest. *
-    **********************************************************************''')
+* No connection to the API-server. The data might not be the latest. *
+**********************************************************************''')
 
 
 def print_currencies():
