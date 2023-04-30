@@ -21,7 +21,7 @@ def error_api_connection_failed(speed=OUTPUT_SPEED):
 
 
 def error_keyboard_interrupt(speed=OUTPUT_SPEED):
-    content = '\n\n❗ Script execution stopped by user!'
+    content = '\n\n❗ Script execution stopped by user.'
     
     for char in content:
         print(char, end='', flush=True)
@@ -29,7 +29,7 @@ def error_keyboard_interrupt(speed=OUTPUT_SPEED):
 
 
 def error_try_again(speed=OUTPUT_SPEED):
-    content = '\033[1;31m\n❌ Try again!!!\n\033[0m'
+    content = '\033[1;31m\n❌ Invalid input. Please try again.\n\033[0m'
     
     for char in content:
         print(char, end='', flush=True)
