@@ -172,8 +172,18 @@ def calc_value(currencies, from_currency, to_currency, amount):
     print(f'{amount:.2f} {from_short} are converted {new_amount:.2f} {to_short}!')
 
 
-def rerun_app():
-    pass
+def rerun_app(rerun=None):
+    
+    while True:
+        rerun = input('\nStart another calculation? ( y | n ): ')
+        if rerun == 'y':
+            main()
+        elif rerun == 'n':
+            break
+        else:
+            tOut.error_try_again()
+            return rerun_app(rerun)
+
 
 
 if __name__ == '__main__':
