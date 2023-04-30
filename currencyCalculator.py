@@ -172,20 +172,19 @@ def calc_value(currencies, from_currency, to_currency, amount):
 
     new_amount = round(amount * data['rates'][to_short], 2)
 
-    print(f'{amount:.2f} {from_short} are converted {new_amount:.2f} {to_short}!')
+    print(f'\n{amount:.2f} {from_short} are converted {new_amount:.2f} {to_short}!')
 
 
-def rerun_app(rerun=None):
-    while True:
-        rerun = input('\nStart another calculation? ( y | n ): ')
-        if rerun == 'y':
-            rerun = None
-            main()
-        elif rerun == 'n':
-            break
-        else:
-            tOut.error_try_again()
-            return rerun_app(rerun)
+def rerun_app():
+    rerun = input("\nDo you want to restart the program? (y/n) ")
+    if rerun == "y":
+        main()
+    elif rerun == "n":
+        print("\nExiting program...")
+    else:
+        # print("Invalid input. Please try again.")
+        tOut.error_try_again()
+        rerun_app()
 
 
 if __name__ == '__main__':
