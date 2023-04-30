@@ -182,7 +182,6 @@ def rerun_app():
     elif rerun == "n":
         print("\nExiting program...")
     else:
-        # print("Invalid input. Please try again.")
         tOut.error_try_again()
         rerun_app()
 
