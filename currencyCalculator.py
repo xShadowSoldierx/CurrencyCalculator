@@ -6,10 +6,15 @@ import json
 import os
 import requests
 
+import terminal_output as tOut
+
 
 def main():
     FILE = os.path.abspath(__file__)
     PATH = os.path.dirname(FILE)
+    
+    # Welcome
+    tOut.print_logo()
     
     # Set available currencies
     currencies = set_currencies()
@@ -18,7 +23,7 @@ def main():
     fetch_data(currencies=currencies, path=PATH)
     
     # Show available currencies
-    print_currencies()
+    print_currencies(currencies=currencies)
     
     # Get from currency
     get_from_currency()
@@ -82,8 +87,17 @@ def fetch_data(currencies, path):
 **********************************************************************''')
 
 
-def print_currencies():
-    pass
+def print_currencies(currencies):
+    print('\nHere is a list of all available currencies:\n')
+    
+    print(f"{'Currency':<25} | {'Short':<5}")
+    print("---------------------------------")
+    for currency, short in currencies.items():
+        if currency == 'us dollar':
+            currency = 'US Dollar'
+        else:
+            currency = currency.title()
+        print(f"{currency:<25} |  {short:<5}")
 
 
 def get_from_currency():
