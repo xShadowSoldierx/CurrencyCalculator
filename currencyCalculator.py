@@ -20,7 +20,7 @@ def main():
     # Set available currencies
     currencies = set_currencies()
     
-    # Fetch data from api
+    # Fetch data from API
     fetch_data(currencies=currencies, path=PATH)
     
     # Show available currencies
@@ -92,6 +92,9 @@ def fetch_data(currencies, path):
                 json.dump(data, f, ensure_ascii=False, indent=4)
                 
         tOut.success_exchange_rates_updated()
+    except KeyboardInterrupt:
+        tOut.error_keyboard_interrupt()
+        sys.exit()
     except:
         tOut.error_api_connection_failed()
 
@@ -173,7 +176,6 @@ def calc_value(currencies, from_currency, to_currency, amount):
 
 
 def rerun_app(rerun=None):
-    
     while True:
         rerun = input('\nStart another calculation? ( y | n ): ')
         if rerun == 'y':
@@ -183,7 +185,6 @@ def rerun_app(rerun=None):
         else:
             tOut.error_try_again()
             return rerun_app(rerun)
-
 
 
 if __name__ == '__main__':
