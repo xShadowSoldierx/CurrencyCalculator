@@ -22,7 +22,7 @@ def main():
     # Set available currencies
     currencies = set_currencies()
     
-    # Fetch data from API
+    # Fetch data from API and save to json files
     fetch_data(currencies=currencies, path=PATH)
     
     # Show available currencies
@@ -37,7 +37,7 @@ def main():
     # Get amount
     amount = get_amount(currencies=currencies, from_currency=from_currency)
     
-    # Calculate value
+    # Calculate and return the converted value
     calc_value(
         currencies=currencies,
         from_currency=from_currency,
