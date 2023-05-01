@@ -1,5 +1,7 @@
-# An application to convert one currency to another currency
-# Copyright (C) Ricardo Boock - 2023
+'''
+An application to convert one currency to another currency
+Copyright (C) Ricardo Boock - 2023
+'''
 
 
 import json
@@ -102,8 +104,8 @@ def fetch_data(currencies, path):
 def print_currencies(currencies):
     content = f'''Here is a list of all available currencies:
 
-{'Currency':<25} | {'Short':<5}
----------------------------------
+    {'Currency':<25} | {'Short':<5}
+    ---------------------------------
 '''
     tOut.print_characters(content=content, speed=tOut.OUTPUT_SPEED)
     
@@ -112,12 +114,12 @@ def print_currencies(currencies):
             currency = 'US Dollar'
         else:
             currency = currency.title()
-        tOut.print_characters(content=f"{currency:<25} |  {short:<5}\n", speed=tOut.OUTPUT_SPEED*0.5)
+        tOut.print_characters(content=f"    {currency:<25} |  {short:<5}\n", speed=tOut.OUTPUT_SPEED*0.5)
 
 
 def get_from_currency(currencies):
     try:
-        from_currency = input('\nChoose the first currency: ').lower()
+        from_currency = input('\n💶 Choose the first currency: ').lower()
         
         if len(from_currency) == 3:
             from_currency = list(currencies.keys())[list(currencies.values()).index(from_currency.upper())]
@@ -136,7 +138,7 @@ def get_from_currency(currencies):
 
 def get_to_currency(currencies):
     try:
-        to_currency = input('\nChoose the second currency: ').lower()
+        to_currency = input('\n💴 Choose the second currency: ').lower()
         
         if len(to_currency) == 3:
             to_currency = list(currencies.keys())[list(currencies.values()).index(to_currency.upper())]
@@ -155,7 +157,7 @@ def get_to_currency(currencies):
 
 def get_amount(currencies, from_currency):
     try:
-        amount = float(input(f'\nEnter the amount of {currencies[from_currency]}: '))
+        amount = float(input(f'\n💰 Enter the amount of {currencies[from_currency]}: '))
     except KeyboardInterrupt:
         tOut.error_keyboard_interrupt()
         sys.exit()
@@ -175,7 +177,7 @@ def calc_value(currencies, from_currency, to_currency, amount):
 
     new_amount = round(amount * data['rates'][to_short], 2)
 
-    print(f'\n{amount:.2f} {from_short} are converted {new_amount:.2f} {to_short}!\n')
+    print(f'\n\033[1;32m💵 {amount:.2f} {from_short} are converted {new_amount:.2f} {to_short}!\033[0m\n')
 
 
 def rerun_app():
