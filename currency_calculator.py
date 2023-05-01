@@ -100,19 +100,22 @@ def fetch_data(currencies, path):
 
 
 def print_currencies(currencies):
-    print('\nHere is a list of all available currencies:\n')
+    content = f'''Here is a list of all available currencies:
+
+{'Currency':<25} | {'Short':<5}
+---------------------------------
+'''
+    tOut.print_characters(content=content, speed=tOut.OUTPUT_SPEED)
     
-    print(f"{'Currency':<25} | {'Short':<5}")
-    print("---------------------------------")
     for currency, short in currencies.items():
         if currency == 'us dollar':
             currency = 'US Dollar'
         else:
             currency = currency.title()
-        print(f"{currency:<25} |  {short:<5}")
+        tOut.print_characters(content=f"{currency:<25} |  {short:<5}\n", speed=tOut.OUTPUT_SPEED*0.5)
 
 
-def get_from_currency(currencies, from_currency=None):
+def get_from_currency(currencies):
     try:
         from_currency = input('\nChoose the first currency: ').lower()
         
@@ -126,12 +129,12 @@ def get_from_currency(currencies, from_currency=None):
         sys.exit()
     except:
         tOut.error_try_again()
-        return get_from_currency(currencies, from_currency)
+        return get_from_currency(currencies)
     
     return from_currency
 
 
-def get_to_currency(currencies, to_currency=None):
+def get_to_currency(currencies):
     try:
         to_currency = input('\nChoose the second currency: ').lower()
         
@@ -145,12 +148,12 @@ def get_to_currency(currencies, to_currency=None):
         sys.exit()
     except:
         tOut.error_try_again()
-        return get_to_currency(currencies, to_currency)
+        return get_to_currency(currencies)
     
     return to_currency
 
 
-def get_amount(currencies, from_currency, amount=None):
+def get_amount(currencies, from_currency):
     try:
         amount = float(input(f'\nEnter the amount of {currencies[from_currency]}: '))
     except KeyboardInterrupt:
@@ -158,7 +161,7 @@ def get_amount(currencies, from_currency, amount=None):
         sys.exit()
     except:
         tOut.error_try_again()
-        return get_amount(currencies, from_currency, amount)
+        return get_amount(currencies, from_currency)
     
     return amount
 
@@ -172,15 +175,15 @@ def calc_value(currencies, from_currency, to_currency, amount):
 
     new_amount = round(amount * data['rates'][to_short], 2)
 
-    print(f'\n{amount:.2f} {from_short} are converted {new_amount:.2f} {to_short}!')
+    print(f'\n{amount:.2f} {from_short} are converted {new_amount:.2f} {to_short}!\n')
 
 
 def rerun_app():
-    rerun = input("\nDo you want to restart the program? (y/n) ")
+    rerun = input("Do you want to restart the program (y/n)? ")
     if rerun == "y":
         main()
     elif rerun == "n":
-        print("\nExiting program...")
+        print("Exiting program...")
     else:
         tOut.error_try_again()
         rerun_app()
