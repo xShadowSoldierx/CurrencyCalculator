@@ -5,13 +5,7 @@ import time
 OUTPUT_SPEED = 0.0025
 
 
-def error_api_connection_failed(speed=OUTPUT_SPEED):
-    content = '''
-\033[1;31m***************************************************************************\033[0m
-\033[1;31m* ❗ No connection to the API-server. The data might not be the latest.❗ *\033[0m
-\033[1;31m***************************************************************************\n\033[0m
-'''
-
+def print_characters(content, speed):
     for char in content:
         if char == '\n':
             print()
@@ -20,46 +14,42 @@ def error_api_connection_failed(speed=OUTPUT_SPEED):
             time.sleep(speed)    
 
 
+def error_api_connection_failed(speed=OUTPUT_SPEED):
+    content = '''\033[1;31m***************************************************************************\033[0m
+\033[1;31m* ❗ No connection to the API-server. The data might not be the latest.❗ *\033[0m
+\033[1;31m***************************************************************************\033[0m\n\n'''
+
+    print_characters(content, speed)
+
+
 def error_keyboard_interrupt(speed=OUTPUT_SPEED):
-    content = '\n\n❗ Script execution stopped by user.'
+    content = '\n\n❗ Script execution stopped by user.\n\n'
     
-    for char in content:
-        print(char, end='', flush=True)
-        time.sleep(speed)
+    print_characters(content, speed)
 
 
 def error_try_again(speed=OUTPUT_SPEED):
-    content = '\033[1;31m\n❌ Invalid input. Please try again.\n\033[0m'
+    content = '\n\033[1;31m❌ Invalid input. Please try again.\033[0m\n'
     
-    for char in content:
-        print(char, end='', flush=True)
-        time.sleep(speed)
+    print_characters(content, speed)
 
 
 def success_exchange_rates_updated(speed=OUTPUT_SPEED):
-    content = '\033[1;32m✅ Exchange rates updated.\n\033[0m'
+    content = '\033[1;32m✅ Exchange rates updated.\033[0m\n\n'
     
-    for char in content:
-        print(char, end='', flush=True)
-        time.sleep(speed) 
+    print_characters(content, speed)
 
 
 def print_logo(speed=OUTPUT_SPEED):
-    logo = '''\033[34m╔═╗┬ ┬┬─┐┬─┐┌─┐┌┐┌┌─┐┬ ┬  ╔═╗┌─┐┬  ┌─┐┬ ┬┬  ┌─┐┌┬┐┌─┐┬─┐
+    content = '''
+\033[34m╔═╗┬ ┬┬─┐┬─┐┌─┐┌┐┌┌─┐┬ ┬  ╔═╗┌─┐┬  ┌─┐┬ ┬┬  ┌─┐┌┬┐┌─┐┬─┐
 ║  │ │├┬┘├┬┘├┤ ││││  └┬┘  ║  ├─┤│  │  │ ││  ├─┤ │ │ │├┬┘
-╚═╝└─┘┴└─┴└─└─┘┘└┘└─┘ ┴   ╚═╝┴ ┴┴─┘└─┘└─┘┴─┘┴ ┴ ┴ └─┘┴└─
-\033[0m
-'''
+╚═╝└─┘┴└─┴└─└─┘┘└┘└─┘ ┴   ╚═╝┴ ┴┴─┘└─┘└─┘┴─┘┴ ┴ ┴ └─┘┴└─\033[0m\n\n'''
 
-    for char in logo:
-        if char == '\n':
-            print()
-        else:
-            print(char, end='', flush=True)
-            time.sleep(speed)
+    print_characters(content, speed)
 
 def print_batman(speed=OUTPUT_SPEED):
-    batman = '''
+    content = '''
 ⠀⠀⠀⢀⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⡀⠀⠀⠀
 ⠀⠀⠀⣼⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣷⡀⠀⠀
 ⠀⠀⢠⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣇⠀⠀
@@ -91,17 +81,13 @@ def print_batman(speed=OUTPUT_SPEED):
 ⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠛⠛⠉⠉⠉⠁
 '''
 
-    for char in batman:
-        if char == '\n':
-            print()
-        else:
-            print(char, end='', flush=True)
-            time.sleep(speed)
+    print_characters(content, speed)
 
 
 if __name__ == '__main__':
     error_api_connection_failed()
     error_keyboard_interrupt()
     error_try_again()
+    success_exchange_rates_updated()
     print_logo()
     print_batman()
