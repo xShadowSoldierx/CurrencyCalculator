@@ -39,6 +39,7 @@ def main():
     
     # Calculate and return the converted value
     calc_value(
+        path=PATH,
         currencies=currencies,
         from_currency=from_currency,
         to_currency=to_currency,
@@ -168,11 +169,11 @@ def get_amount(currencies, from_currency):
     return amount
 
 
-def calc_value(currencies, from_currency, to_currency, amount):
+def calc_value(path, currencies, from_currency, to_currency, amount):
     from_short = currencies[from_currency]
     to_short = currencies[to_currency]
 
-    with open(f'currency/currency_{from_short}.json', 'r') as f:
+    with open(f'{path}/currency/currency_{from_short}.json', 'r') as f:
         data = json.load(f)
 
     new_amount = round(amount * data['rates'][to_short], 2)
