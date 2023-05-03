@@ -6,7 +6,6 @@ Copyright (C) Ricardo Boock - 2023
 
 import json
 import os
-import sys
 import requests
 
 import terminal_output as tOut
@@ -95,10 +94,7 @@ def fetch_data(currencies, path):
                 json.dump(data, f, ensure_ascii=False, indent=4)
                 
         tOut.success_exchange_rates_updated()
-    except KeyboardInterrupt:
-        tOut.error_keyboard_interrupt()
-        sys.exit()
-    except:
+    except Exception:
         tOut.error_api_connection_failed()
 
 
@@ -126,11 +122,8 @@ def get_from_currency(currencies):
             from_currency = list(currencies.keys())[list(currencies.values()).index(from_currency.upper())]
         
         if from_currency not in currencies:
-            raise ValueError
-    except KeyboardInterrupt:
-        tOut.error_keyboard_interrupt()
-        sys.exit()
-    except:
+            raise Exception
+    except Exception:
         tOut.error_try_again()
         return get_from_currency(currencies)
     
@@ -145,11 +138,8 @@ def get_to_currency(currencies):
             to_currency = list(currencies.keys())[list(currencies.values()).index(to_currency.upper())]
         
         if to_currency not in currencies:
-            raise ValueError
-    except KeyboardInterrupt:
-        tOut.error_keyboard_interrupt()
-        sys.exit()
-    except:
+            raise Exception
+    except Exception:
         tOut.error_try_again()
         return get_to_currency(currencies)
     
@@ -159,10 +149,7 @@ def get_to_currency(currencies):
 def get_amount(currencies, from_currency):
     try:
         amount = float(input(f'\n💰 Enter the amount of {currencies[from_currency]}: '))
-    except KeyboardInterrupt:
-        tOut.error_keyboard_interrupt()
-        sys.exit()
-    except:
+    except Exception:
         tOut.error_try_again()
         return get_amount(currencies, from_currency)
     
