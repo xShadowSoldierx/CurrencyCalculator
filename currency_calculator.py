@@ -1,6 +1,6 @@
 """
-An application to convert one currency to another currency
-Copyright (C) Ricardo Boock - 2023
+An application for converting one currency into another currency
+Copyright (C) Ricardo Boock - 2024
 """
 
 from typing import Dict
